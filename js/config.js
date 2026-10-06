@@ -34,9 +34,10 @@ BX.CONFIG = {
   // Stockage des données
   //   "local"  : navigateur uniquement (prototype testable seul, rien n'est partagé)
   //   "sheets" : Google Sheets via Apps Script (voir DEPLOY.md, partie 3)
-  storage: "local",
+  storage: "sheets",
   sheets: {
-    webAppUrl: "",   // URL du déploiement Apps Script, se termine par /exec
-    secret: ""       // même valeur que SECRET dans apps-script/Code.gs
+    spreadsheetId: "17-ff2CJqblFu4UIv3tUeVDgmQQpbrgp6JUGBp33Xx6I",
+    webAppUrl: "https://script.google.com/macros/s/AKfycbwSILQYOM-b7Nvzac7L-rBYe1OVj6ebXDZkzJ09926v2YViOw9i3-gQRtRk1qYc-M9u/exec",   // URL du déploiement Apps Script, se termine par /exec
+    secret: "Boxcom2020@screenkeyOf2020zak"       // même valeur que SECRET dans apps-script/Code.gs
   }
 };

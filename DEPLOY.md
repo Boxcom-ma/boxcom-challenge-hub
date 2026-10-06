@@ -43,17 +43,23 @@ Ouvre `js/config.js` et vérifie :
 Sans cette étape, chaque personne voit son propre site vide. Il faut une base commune.
 Le plus simple avec ton compte Google : un classeur Sheets relié au site par un script.
 
-1. Crée un classeur Google Sheets vide, nomme-le « Boxcom Challenge ».
-2. Menu **Extensions > Apps Script**. Efface le contenu, colle celui de `apps-script/Code.gs`.
+1. Le projet est déjà lié au classeur « Boxcom challenge » :
+   `https://docs.google.com/spreadsheets/d/17-ff2CJqblFu4UIv3tUeVDgmQQpbrgp6JUGBp33Xx6I/edit`.
+   Les onglets Config, Teams, Draw et Submissions y sont déjà préparés.
+2. Dans ce classeur, ouvre **Extensions > Apps Script**. Efface le contenu, colle celui de `apps-script/Code.gs`.
 3. En haut du script, remplace `CHANGE-MOI` par un mot de passe long de ton choix (le « secret »).
 4. Clique sur **Déployer > Nouveau déploiement > Type : Application Web**.
    - Exécuter en tant que : **Moi**
    - Qui a accès : **Tout le monde**
    Autorise l'accès demandé par Google, puis copie l'URL qui se termine par `/exec`.
-5. Dans `js/config.js`, renseigne :
+5. Dans `js/config.js`, conserve `storage: "sheets"` et renseigne l'URL et le secret :
    ```js
    storage: "sheets",
-   sheets: { webAppUrl: "L'URL /exec copiée", secret: "le même secret qu'à l'étape 3" }
+   sheets: {
+     spreadsheetId: "17-ff2CJqblFu4UIv3tUeVDgmQQpbrgp6JUGBp33Xx6I",
+     webAppUrl: "L'URL /exec copiée",
+     secret: "le même secret qu'à l'étape 3"
+   }
    ```
 6. Recharge le site : l'onglet Admin affiche « Stockage actuel : Google Sheets ».
    Fais un tirage de test : les onglets Config, Teams, Draw et Submissions se remplissent.

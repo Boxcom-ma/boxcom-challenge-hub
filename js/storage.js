@@ -41,12 +41,18 @@ window.BX = window.BX || {};
     name: "sheets",
     load: function () {
       var c = BX.CONFIG.sheets;
+      if (!c.webAppUrl || !/\/exec(?:\?|$)/.test(c.webAppUrl)) {
+        return Promise.reject(new Error("Google Sheets n'est pas encore activé : ajoute l'URL Apps Script /exec dans js/config.js."));
+      }
       return fetch(c.webAppUrl, { method: "GET" })
         .then(function (r) { return r.json(); })
         .then(function (s) { return s && s.version ? s : null; });
     },
     save: function (state) {
       var c = BX.CONFIG.sheets;
+      if (!c.webAppUrl || !/\/exec(?:\?|$)/.test(c.webAppUrl)) {
+        return Promise.reject(new Error("URL Apps Script /exec manquante dans js/config.js."));
+      }
       return fetch(c.webAppUrl, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -59,7 +65,7 @@ window.BX = window.BX || {};
 
   function pickAdapter() {
     var c = BX.CONFIG;
-    if (c.storage === "sheets" && c.sheets && c.sheets.webAppUrl) return SheetsAdapter;
+    if (c.storage === "sheets" && c.sheets) return SheetsAdapter;
     return LocalAdapter;
   }
 
